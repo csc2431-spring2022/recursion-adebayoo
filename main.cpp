@@ -12,7 +12,7 @@ unsigned long long int Fibonacci(unsigned int n);
 void PrintReverseString(const string& str, ostream& output = cout);
 // You may change the parameters of these functions
 size_t MinimumPosition(const int array[], size_t size, size_t position = 0, size_t minPos = 0);
-void SelectionSort(int array[], size_t size);
+void SelectionSort(int array[], size_t size, int num = 0 );
 
 
 
@@ -119,15 +119,23 @@ size_t MinimumPosition(const int array[], size_t size, size_t position, size_t m
         return MinimumPosition(array, size, position + 1, minPos);
 
 }
-void SelectionSort(int array[], size_t size){
-    int i, j, min_num;
-    for (i = 0; i < size-1; i++){
-        min_num = i;
-        for (j = i+1; j < size; j++)
-            if (array[j] < array[min_num])
-                min_num = j;
-          int temp = array[i];
-          array[i] = array[min_num];
-          array[min_num] = temp;
+void SelectionSort(int array[], size_t size, int num){
+  int low = num;
+   if (num == size-1){
+       return;
+   }else{
+       for (int i= 0; i< size -1; i++){
+           if (array[i+1] < array[i]){
+               low = i+ 1;
+           }
+       }
+       if(array[num] > array[low]){
+
+           int temp = array[low];
+           array[low] = array[num];
+           array[num] = temp;
+       }
+   }
+return SelectionSort(array, size, num+1);
     }
-}
+
